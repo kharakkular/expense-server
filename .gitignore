@@ -1,3 +1,4 @@
 node_modules
 
-.env
+# Ignoring all files having environment variables
+*.env
