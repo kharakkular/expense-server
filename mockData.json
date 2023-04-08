@@ -1,0 +1,17 @@
+{
+    "barcode": "07835080",
+    "location": "heartland, Mississauga",
+    "datePurchased": "2023-03-23T18:25:43.511Z",
+    "products": [
+        {
+            "name": "Snack Bars",
+            "price": 4.98,
+            "code": "002190848816"
+        },
+        {
+            "name": "Ear Buds",
+            "price": 4.88,
+            "code": "068113100946"
+        }
+    ]
+}

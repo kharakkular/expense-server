@@ -8,5 +8,7 @@ env.config({
 module.exports = {
     NODE_ENV: process.env.NODE_ENV || 'd-development',
     HOST: process.env.HOST || 'localhost',
-    PORT: process.env.PORT || '8083'
+    PORT: process.env.PORT || '8083',
+    UserName: process.env.UserName,
+    Password: process.env.Password
 };
