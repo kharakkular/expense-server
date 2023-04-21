@@ -40,6 +40,6 @@ mongoose.connect(URI)
     .then(res => {
         // console.log('Response from Mongoose is ', {res: res});
         app.listen(config.PORT, config.HOST, () => {
-            console.log(`Server is running on port http://localhost:${config.PORT}`);
+            console.log(`Server is running on port ${config.HOST}:${config.PORT}`);
         });
     }).catch(err => console.log('Error while connecting to MongoDB', {err}));

@@ -34,9 +34,9 @@ exports.postExpense = async (req, res, next) => {
             });
             tempProducts.forEach((p) => {
                 const item = {
-                    name: p.name,
-                    price: p.price,
-                    code: p.code
+                    name: p.productName,
+                    price: p.productPrice,
+                    code: p.productCode
                 };
                 receipt1.products.push(item);
             })
