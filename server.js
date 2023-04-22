@@ -6,10 +6,9 @@ const expenseRoutes = require('./routes/expense');
 
 const app = express();
 
-
 // checking values of node and name supplied through terminal
-console.log('Values of PORT, NODE_ENV and root directory are ', 
-{PORT: process.env.PORT, NODE_ENV: config.NODE_ENV, dirName: __dirname}
+console.log('Values of PORT and root directory are ', 
+{PORT: process.env.PORT, dirName: __dirname}
 );
 const URI = `mongodb+srv://${config.UserName}:${config.Password}@cluster0.x1tfvys.mongodb.net/expense?retryWrites=true&w=majority`;
 
