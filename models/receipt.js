@@ -9,6 +9,7 @@ const Schema = mongoose.Schema;
 
 const receiptSchema = new Schema({
     barcode: String,
+    store: String,
     location: String,
     products: [{
         name: {type: String, required: true},

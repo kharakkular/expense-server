@@ -18,8 +18,14 @@ exports.getExpenses = async (req, res, next) => {
 }
 
 exports.postExpense = async (req, res, next) => {
-    // const receipt = {...req.body};
-    const tempProducts = req.body.products;
+    const products = req.body.products.map(p => {
+        const item = {
+            name: p.productName,
+            price: p.productPrice,
+            code: p.productCode
+        };
+        return item;
+    });
     // check to see if the receipt is already defined
     try {
         
@@ -29,18 +35,13 @@ exports.postExpense = async (req, res, next) => {
         if(prevReceipt === null) {
             const receipt1 = new Receipt({
                 barcode: req.body.barcode,
+                store: req.body.store,
                 location: req.body.location,
-                datePurchased: req.body.purchased
+                datePurchased: req.body.purchased,
+                products: [...products]
             });
-            tempProducts.forEach((p) => {
-                const item = {
-                    name: p.productName,
-                    price: p.productPrice,
-                    code: p.productCode
-                };
-                receipt1.products.push(item);
-            })
-            console.log('Response from post expense method', {receipt1, p: receipt1.products});
+            // console.log('Response from post expense method', {receipt1, p: receipt1.products});
+            console.log('New Product has been added');
             receipt1.save()
                 .then(result => {
                     console.log('response from db is ', {result})
