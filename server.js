@@ -7,9 +7,7 @@ const expenseRoutes = require('./routes/expense');
 const app = express();
 
 // checking values of node and name supplied through terminal
-console.log('Values of PORT and root directory are ', 
-{PORT: process.env.PORT, dirName: __dirname}
-);
+console.log('Values of PORT and root directory are ', {PORT: process.env.PORT, dirName: __dirname});
 const URI = `mongodb+srv://${config.UserName}:${config.Password}@cluster0.x1tfvys.mongodb.net/expense?retryWrites=true&w=majority`;
 
 app.use(express.json());
@@ -32,7 +30,8 @@ app.use((error, req, res, next) => {
     const message = error.message;
     const data = error.data;
     res.status(status).json({ message, data });
-})
+});
+
 console.log('URI is ', URI);
 
 mongoose.connect(URI)

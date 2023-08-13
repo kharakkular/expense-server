@@ -12,11 +12,12 @@ const receiptSchema = new Schema({
     store: String,
     location: String,
     products: [{
-        name: {type: String, required: true},
-        price: {type: Number, required: true},
-        code: {type: String, required: true}
+        name: {type: String, required: [true, 'A Name is required']},
+        price: {type: Number, required: [true, 'A Price is required']},
+        code: {type: String, required: [true, 'A Code is required']}
     }],
-    datePurchased: { type: Date, default: Date.now }
+    datePurchased: { type: Date, default: Date.now },
+    total: {type: Number, required: [true, 'Total value of Receipt is missing']}
 });
 
 // module.exports = {

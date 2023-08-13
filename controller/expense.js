@@ -1,4 +1,3 @@
-// const {Receipt, Product} = require('../models/receipt');
 const Receipt = require('../models/receipt');
 
 exports.getExpenses = async (req, res, next) => {
@@ -18,14 +17,16 @@ exports.getExpenses = async (req, res, next) => {
 }
 
 exports.postExpense = async (req, res, next) => {
+    console.log({body: req.body });
     const products = req.body.products.map(p => {
         const item = {
-            name: p.productName,
-            price: p.productPrice,
-            code: p.productCode
+            name: p.name,
+            price: p.price,
+            code: p.code
         };
         return item;
     });
+    console.log({products});
     // check to see if the receipt is already defined
     try {
         
@@ -37,8 +38,9 @@ exports.postExpense = async (req, res, next) => {
                 barcode: req.body.barcode,
                 store: req.body.store,
                 location: req.body.location,
-                datePurchased: req.body.purchased,
-                products: [...products]
+                datePurchased: req.body.datePurchased,
+                products: [...products],
+                total: req.body.total
             });
             // console.log('Response from post expense method', {receipt1, p: receipt1.products});
             console.log('New Product has been added');
