@@ -17,7 +17,8 @@ const receiptSchema = new Schema({
         code: {type: String, required: [true, 'A Code is required']}
     }],
     datePurchased: { type: Date, default: Date.now },
-    total: {type: Number, required: [true, 'Total value of Receipt is missing']}
+    total: {type: Number, required: [true, 'Total value of Receipt is missing']},
+    imageName: String
 });
 
 // module.exports = {

@@ -1,3 +1,5 @@
+const fs = require('node:fs/promises');
+
 const Receipt = require('../models/receipt');
 
 exports.getExpenses = async (req, res, next) => {
@@ -17,8 +19,14 @@ exports.getExpenses = async (req, res, next) => {
 }
 
 exports.postExpense = async (req, res, next) => {
-    console.log({body: req.body });
-    const products = req.body.products.map(p => {
+    console.log({ file: req.imageFile, fileName: req.body.imageName });
+
+    console.log('-------------------');
+    console.dir(req.body);
+    const productsArr = JSON.parse(req.body.products);
+    // console.log('-------------------');
+    // console.dir(productsArr);
+    const products = productsArr.map(p => {
         const item = {
             name: p.name,
             price: p.price,
@@ -28,8 +36,9 @@ exports.postExpense = async (req, res, next) => {
     });
     console.log({products});
     // check to see if the receipt is already defined
+    const filePresent = await fs.access(`/images/${req.body.imageName}`);
     try {
-        
+
         const prevReceipt = await Receipt.findOne({barcode: req.body.barcode});
         
         console.log("value of prevReceipt", {prevReceipt});
@@ -40,7 +49,8 @@ exports.postExpense = async (req, res, next) => {
                 location: req.body.location,
                 datePurchased: req.body.datePurchased,
                 products: [...products],
-                total: req.body.total
+                total: req.body.total,
+                imageName: req.body.imageName
             });
             // console.log('Response from post expense method', {receipt1, p: receipt1.products});
             console.log('New Product has been added');
@@ -58,11 +68,17 @@ exports.postExpense = async (req, res, next) => {
                 });
         }
         else {
+            if(filePresent) {
+                await fs.unlink(`/images/${req.body.imageName}`);
+            }
             res.status(409).json({
                 message: "Receipt with barcode " + req.body.barcode + " already exists"
             });
         }
     } catch (error) {
+        if(filePresent) {
+            await fs.unlink(`/images/${req.body.imageName}`);
+        }
         res.status(500).json({
             error: error.message,
             message: "error posting data in DB"

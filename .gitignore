@@ -2,3 +2,9 @@ node_modules
 
 # Ignoring all files having environment variables
 *.env
+
+# Ignore Images folder
+images/
+
+# Ignore .DS_Store file
+.DS_Store
