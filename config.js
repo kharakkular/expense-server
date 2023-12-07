@@ -8,6 +8,6 @@ env.config({
 module.exports = {
     HOST: process.env.HOST || 'localhost',
     PORT: process.env.PORT || '8083',
-    UserName: process.env.UserName,
+    UserName: process.env.name,
     Password: process.env.Password
 };
